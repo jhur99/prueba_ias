@@ -3,12 +3,12 @@ const {
     GetSecretValueCommand,
   } = require( "@aws-sdk/client-secrets-manager")
 
-  const secret_name = "test3_secrert";
+const secret_name = "test3_secrert";
+const access_key = process.env.ACCESS_KEY
+const secret_key = process.env.SECRET_KEY
 
 const client = new SecretsManagerClient({
-  region: "us-east-1",
-  accesskey : 'AKIAZQ3DOVQDXJXHBQZM',
-  secretkey: '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'
+  region: "us-east-1"
 });
 
 // type secretType = {
@@ -28,6 +28,8 @@ async function getSecret() {
         new GetSecretValueCommand({
           SecretId: secret_name,
           VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+          accesskey : access_key,
+          secretkey: secret_key
         })
       );
     } catch (error) {
